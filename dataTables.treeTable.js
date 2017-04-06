@@ -27,15 +27,17 @@
 	}
 
 	/**
-	 * Explicitly trigger the initialisation of treeTable.
+	 * Explicitly trigger the initialisation of treeTable. 显式初始化treeTable
 	 */
 	$.fn.dataTableExt.oApi.fnInitTreeTable = function (oSettings, options) {
 		initTreeTable(oSettings.oInstance, options || {});
 	};
 
 	/** 
-	 * Save expanded nodes (TRs) before reloading data table.
-	 * And after reloading, call restoreExpanded to restore the expand state.
+	 * Save expanded nodes (TRs) before reloading data table. 
+	 * 保存已经展开的节点
+	 * And after reloading, call restoreExpanded to restore the expand state. 
+	 * 展开后，调用restoreExpanded，来恢复节点
 	 */
 	function saveExpanded (oSettings) {
 		var oTable = oSettings.oInstance, expandedRows;
@@ -52,6 +54,7 @@
 
 	/**
 	 * Expand nodes which are saved before reloading data table to restore the expand state.
+	 * 展开之前保存的节点
 	 */
 	function restoreExpanded(oSettings) {
 		if (!isTreeTableInitialized(oSettings)) {
@@ -76,11 +79,12 @@
 		restoreExpanded(oSettings);
 	};
 
-	// Register a plugin to integrate jquery.treeTable
+	// Register a plugin to integrate jquery.treeTable 注册插件
 	$.fn.dataTableExt.aoFeatures.push({
 		"fnInit": function (oDTSettings) {
 			var oTable = oDTSettings.oInstance,
 				opts = getInitOpts(oDTSettings);
+				console.log(oDTSettings);
 			if (typeof opts.fnPreInit === 'function') {
 				oTable.oApi._fnCallbackReg(oDTSettings, "aoRowCreatedCallback", opts.fnPreInit, "preInitTreeTable");
 			}
